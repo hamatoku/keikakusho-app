@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0079)file:///C:/Users/HT_USER9/Downloads/hamatoku-keikakusho-v08-firebase%20(1).html -->
 <html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -239,7 +238,7 @@
   "use strict";
 
   // ================= render helpers =================
-  function esc(s){ return String(s==null?"":s); }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];}); }
 
   function syncBadge(opts){
     return opts && opts.sync ? '<span class="sync-badge" title="他の帳票にも自動で反映されます">🔗</span>' : '';
@@ -557,7 +556,7 @@
     creating: false
   };
 
-  function esc2(s){ return String(s==null?"":s); }
+  function esc2(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];}); }
 
   // ---------- collect / apply form data ----------
   function collectForm(){
@@ -768,7 +767,7 @@
       var kana = esc2(clientDisplayKana(d));
       var care = esc2(clientDisplayCare(d));
       var meta = "最終更新: " + fmtTime(d.updatedAt);
-      return '<button type="button" class="client-item" data-open="'+row.item.id+'">'
+      return '<button type="button" class="client-item" data-open="'+esc2(row.item.id)+'">'
         + '<div class="ci-main"><span class="ci-name">'+name+'</span>'+(care?('<span class="ci-care">'+care+'</span>'):'')+'</div>'
         + (kana?('<div class="ci-meta">'+kana+'</div>'):'')
         + '<div class="ci-meta">'+esc2(meta)+'</div>'
@@ -912,7 +911,13 @@
   function renderSigPreview(dataUrl){
     var wrap = document.getElementById("sigPreviewWrap");
     if(!wrap) return;
-    wrap.innerHTML = dataUrl ? ('<img src="'+dataUrl+'" alt="署名">') : "";
+    wrap.textContent = "";
+    if(dataUrl && /^data:image\/(png|jpeg);base64,[A-Za-z0-9+\/=]+$/.test(dataUrl)){
+      var img = document.createElement("img");
+      img.src = dataUrl;
+      img.alt = "署名";
+      wrap.appendChild(img);
+    }
   }
 
   function initSignaturePad(){
@@ -1264,7 +1269,7 @@
         } else if(code){
           msg="ログインエラー: " + code;
         }
-        st.innerHTML = msg + (code ? '<br><span style="font-size:12px;color:#64748b;">エラーコード: '+esc(code)+'</span>' : '');
+        st.innerHTML = esc(msg) + (code ? '<br><span style="font-size:12px;color:#64748b;">エラーコード: '+esc(code)+'</span>' : '');
         st.style.color="#b42318";
       });
     }
