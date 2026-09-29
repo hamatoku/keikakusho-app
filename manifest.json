@@ -1,0 +1,17 @@
+{
+  "name": "浜徳商事 福祉用具計画書",
+  "short_name": "浜徳計画書",
+  "id": "./",
+  "description": "浜徳商事スタッフ用 福祉用具サービス計画書共有アプリ",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f9fc",
+  "theme_color": "#17324d",
+  "orientation": "portrait-primary",
+  "lang": "ja",
+  "icons": [
+    {"src":"./icon.svg","sizes":"192x192","type":"image/svg+xml","purpose":"any maskable"},
+    {"src":"./icon.svg","sizes":"512x512","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}

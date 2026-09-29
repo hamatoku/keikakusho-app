@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#17324d"/>
+  <rect x="38" y="38" width="436" height="436" rx="92" fill="#ffffff"/>
+  <circle cx="256" cy="220" r="118" fill="#17324d"/>
+  <path d="M190 220h132M256 154v132" stroke="#ffffff" stroke-width="28" stroke-linecap="round"/>
+  <text x="256" y="392" text-anchor="middle" font-family="sans-serif" font-size="68" font-weight="800" fill="#17324d">浜徳</text>
+</svg>
