@@ -1008,17 +1008,8 @@
   }
 
   function deleteCurrentClient(){
-    if(!S.clientId) return;
-    if(!confirm("この利用者のデータを完全に削除します。元に戻せません。よろしいですか？")) return;
-    var id = S.clientId;
-    if(S.unsubDoc){ S.unsubDoc(); S.unsubDoc = null; }
-    S.db.doc("clients/"+id).delete().then(function(){
-      if(history.state && history.state.screen === "edit"){ history.back(); }
-      else { backToList(true); }
-    }).catch(function(){
-      alert("削除に失敗しました。通信状態を確認してもう一度お試しください。");
-    });
-  }
+    alert("利用者データの削除はできません。必要な場合は管理者へ連絡してください。");
+}
 
   function backToList(fromPopState){
     if(S.unsubDoc){ S.unsubDoc(); S.unsubDoc = null; }
