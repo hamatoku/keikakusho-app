@@ -1365,4 +1365,12 @@ if ("serviceWorker" in navigator) {
   });
 }
 </script>
-</body></html>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("./sw.js")
+      .catch(function (err) {
+        console.warn("PWA Service Worker registration failed:", err);
+      });
+  });
+}
+</script></body></html>
