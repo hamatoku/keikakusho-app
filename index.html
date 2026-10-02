@@ -1168,7 +1168,10 @@
   }
 
   function doSave(){
-    if(!S.clientId) return;
+    if(!S.clientId){
+  saveNote.textContent = "利用者が選択されていません";
+  return;
+}
     var record = collectForm();
     record.updatedAt = new Date().toISOString();
     record.updatedBy = S.myId || null;
