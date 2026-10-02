@@ -185,8 +185,8 @@
 
 <footer class="actionbar no-print" id="actionbar" style="display:none;">
   <div class="actionbar-inner">
-  <button class="btn primary" id="btnSave">保存する</button>
-<button class="btn primary" id="btnPrint">この内容で印刷</button> 
+  <button type="button" class="btn primary" id="btnSave">保存する</button>
+<button type="button" class="btn primary" id="btnPrint">この内容で印刷</button>
   </div>
   <div class="save-note" id="saveNote">&nbsp;</div>
 </footer>
@@ -1196,6 +1196,12 @@
 
 // ---------- save / print ----------
 document.getElementById("btnSave").addEventListener("click", function(){
+  if(!S.clientId){
+    saveNote.textContent = "利用者が選択されていません";
+    return;
+  }
+
+  saveNote.textContent = "保存中…";
   doSave();
 });
 
