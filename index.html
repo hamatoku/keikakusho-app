@@ -1195,11 +1195,14 @@
   window.addEventListener("online", flush);
 
   // ---------- print ----------
-  document.getElementById("btnPrint").addEventListener("click", function(){
-    doSave();
-    window.print();
-  });
+ document.getElementById("btnSave").addEventListener("click", function(){
+  doSave();
+});
 
+document.getElementById("btnPrint").addEventListener("click", function(){
+  doSave();
+  window.print();
+});
   // ================= boot =================
 
   // ===== Firebase接続・ログイン =====
