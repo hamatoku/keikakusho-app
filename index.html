@@ -1144,6 +1144,9 @@
         return;
     }
 
+    kanaInput.dataset.autoKana = kanaInput.value;
+    kanaInput.dispatchEvent(new Event("input", {bubbles:true}));
+}
   main.addEventListener("compositionstart", function(e){
     if(!e.target.name || NAME_FIELDS.indexOf(e.target.name) === -1) return;
     compBuffers[e.target.name] = "";
