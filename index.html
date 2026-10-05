@@ -1125,15 +1125,25 @@
   function isKanaReading(v){ return /^[ぁ-ゖァ-ヺー・]+$/.test(String(v||"")); }
   function applyAutoKana(nameField, reading){
     if(!reading || !isKanaReading(reading)) return;
+
     var kanaField = nameField.replace("_name", "_kana");
     var kanaInput = main.querySelector('[name="'+kanaField+'"]');
     if(!kanaInput) return;
+
     var kata = hiraganaToKatakana(reading);
-    // 自動入力した値であることを記録。手入力で変更された場合は上書きしない。
-    kanaInput.value = kata;
-    kanaInput.dataset.autoKana = kata;
-    kanaInput.dispatchEvent(new Event("input", {bubbles:true}));
-  }
+    var current = kanaInput.value || "";
+    var autoKana = kanaInput.dataset.autoKana || "";
+
+    // 直前まで自動入力されたカナなら、その後ろに今回の読みを追加
+    if(current === autoKana){
+        kanaInput.value = current + kata;
+    }else if(current === ""){
+        kanaInput.value = kata;
+    }else{
+        // フリガナを手入力で変更していた場合は勝手に上書きしない
+        return;
+    }
+
   main.addEventListener("compositionstart", function(e){
     if(!e.target.name || NAME_FIELDS.indexOf(e.target.name) === -1) return;
     compBuffers[e.target.name] = "";
